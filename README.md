@@ -1,5 +1,5 @@
 # Partial_Correlation
-Sure, here's the adjusted response using MathJax:
+
 
 Partial Correlation: Understanding the Relationship between Variables
 
