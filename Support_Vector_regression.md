@@ -191,6 +191,28 @@ You can see how the original 2D data points (red) are transformed into blue and 
 
 Keep in mind that this is a simple visualization of the transformation using a toy dataset. In practice, the RBF kernel can create more complex transformations depending on the data and the gamma parameter.
 
+**what you mean by “The resulting mapped data points are computed using the RBF kernel and form a basis for a higher-dimensional space” " the first two components of the transformed RBF space"? and another question, what you mean by When we take the first two components of the transformed data (Phi[:, 0] and Phi[:, 1]), we can see a linearly separable pattern in the right plot that can be exploited by the SVR algorithm" ? please explain things, I’m not expert in this topic so make things clear!
+**1. “The resulting mapped data points are computed using the RBF kernel and form a basis for a higher-dimensional space”: In the context of the example code provided, we define an RBF kernel function, which computes the similarity (in terms of a Gaussian radial basis function) between pairs of data points. The computed resulting values (contained in Phi) can be seen as new coordinates or features for each data point in a higher-dimensional space (in this case, dimensions equal to the number of original data points).
+
+**2. “the first two components of the transformed RBF space”: This refers to the first two columns of the Phi matrix obtained using the RBF kernel transformation. Each row in Phi corresponds to a single transformed data point, and each column in Phi represents one of the new coordinates or features in the higher-dimensional space.
+
+**3. “When we take the first two components of the transformed data (Phi[:, 0] and Phi[:, 1]), we can see a linearly separable pattern in the right plot that can be exploited by the SVR algorithm”: In the right plot of the provided code, we display only the first two columns of the Phi matrix, which represents two of the newly coordinated features in the higher-dimensional space. It helps to visualize a 2D representation of the transformed data. Linearly separable in this context means that we can draw a straight line or a linear boundary that separates the data well in the higher-dimensional space. Although the actual separation might involve more dimensions, we visualize it here in 2D space for simplification. The ability to create this separation is something the SVR algorithm can use to create a more complex function that fits the non-linear relationship in the original 2D data when using the RBF kernel.
+
+**Please note that the provided code and plots are a simplified visualization of the transformation process. The actual process of training an SVR model with an RBF kernel is more complex and can involve more dimensions, which makes it challenging to visualize in a 2D or 3D space. The example was created to help visualize a high-level understanding of how the RBF kernel can transform the original data points into a higher-dimensional space where the SVR algorithm can exploit the structure of the transformed data to learn more complex relationships. 
+
+
+
+**does Gaussian radial basis function transform data from 2d to 3d, or other dimension?
+The Gaussian Radial Basis Function (RBF) kernel can transform data from its original dimensionality into a higher-dimensional space. The dimensionality of the transformed space is not restricted to 3D–it can be any higher dimension.
+
+**In the context of Support Vector Machines (SVM) or Support Vector Regression (SVR), the dimensionality of the transformed space using the RBF kernel is usually equal to the number of data points in the training dataset. This happens because the kernel computes the similarity between each pair of data points using the Gaussian function, essentially creating a new feature for each data point.
+
+**To illustrate this, let’s say we have ‘n’ data points in a 2D space (with x and y coordinates). When we apply the RBF kernel transformation, we obtain an ‘n x n’ matrix, where each entry represents the kernel computation between a pair of data points. This results in the transformed data having ‘n’ new features (in this case, dimensions). However, note that in practice, not all ‘n’ dimensions are generally useful or necessary, and the data tends to have an underlying lower-dimensional structure that is more relevant to learning.
+
+**In summary, the Gaussian RBF kernel can transform data to a higher-dimensional space beyond 3D, and the dimensionality of the transformed space depends on the number of data points used in the transformation. However, it’s crucial to understand that the transformation’s purpose is to enable the learning algorithm to capture more complexity in the data rather than visualizing the data in a higher-dimensional space directly.
+
+
+
 
 # Why using SVR instead of polynomial regression?
 In normal regression, we can induce nonlinear terms by including polynomial terms or other nonlinear transformations of the input features. However, this approach can lead to overfitting if the degree of the polynomial or the complexity of the transformation is too high. On the other hand, SVR uses a kernel function to implicitly map the input features into a higher-dimensional feature space, where the data may be better separated and the nonlinear relationships may be more easily modeled.
