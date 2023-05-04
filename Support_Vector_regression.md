@@ -89,11 +89,37 @@ fig_hyperplane.update_layout(scene=dict(xaxis_title='X1', yaxis_title='X2', zaxi
                              title='Linear Hyperplane in 3D Space')
 fig_hyperplane.show()
 
+# Generate points on the RBF transformed hyperplane
+X_space_transformed = np.c_[xx.ravel(), yy.ravel()]
+y_space_transformed = linear_model.predict(X_space_transformed)
+y_space_transformed = y_space_transformed.reshape(xx.shape)
+
+# Generate points in the original 2D space
+X_space = np.linspace(X[:, 0].min(), X[:, 0].max(), 20)
+X_space_transformed = rbf_feature.transform(X_space.reshape(-1, 1))
+y_space = linear_model.predict(X_space_transformed)
+
+# Visualize the projection in the 3D transformed space
+fig_projection = go.Figure(data=[go.Scatter3d(x=X_transformed[:, 0], y=X_transformed[:, 1], z=y,
+                                              mode='markers', marker=dict(size=5)),
+                                  go.Surface(x=xx, y=yy, z=y_space_transformed, opacity=0.5),
+                                  go.Scatter3d(x=X_space_transformed[:, 0], y=X_space_transformed[:, 1], z=y_space,
+                                              mode='lines', line=dict(color='red'))])
+fig_projection.update_layout(scene=dict(xaxis_title='X1', yaxis_title='X2', zaxis_title='y'),
+                             title='Projection in the 3D Transformed Space')
+fig_projection.show()
+
+# Visualize the fitted nonlinear curve in the original 2D space
+fig_fitted_curve = px.scatter(x=X[:, 0], y=y, title='Fitted Nonlinear Curve in 2D Space')
+fig_fitted_curve.add_scatter(x=X_space, y=y_space, mode='lines', line=dict(color='red'))
+fig_fitted_curve.show()
+
 ```
 This code generates three visualizations:
 The original 2D nonlinear data.
 The transformed 3D data using the RBF kernel.
 The linear hyperplane fitted in the 3D space.
+transform the data and the hyperplane back to 2D.
 Keep in mind that this example uses a kernel approximation method (Nystroem) to approximate the RBF kernel transformation, which allows us to visualize the transformed data in 3D. In practice, you might use the exact RBF kernel in a kernel-based regression method, such as kernel ridge regression or support vector regression, which would not require an explicit transformation of the data.
 
 
