@@ -61,7 +61,7 @@ X, y = make_regression(n_samples=100, n_features=1, noise=20, random_state=42)
 y = y**2
 
 # RBF kernel transformation
-rbf_feature = Nystroem(gamma=0.1, random_state=42)
+rbf_feature = Nystroem(gamma=0.1, random_state=42, n_components=2)
 X_transformed = rbf_feature.fit_transform(X)
 
 # Fit a linear model in the transformed 3D space
