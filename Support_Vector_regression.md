@@ -190,3 +190,12 @@ To explain the transformation:
 You can see how the original 2D data points (red) are transformed into blue and green points using the RBF kernel. When we take the first two components of the transformed data (Phi[:, 0] and Phi[:, 1]), we can see a linearly separable pattern in the right plot that can be exploited by the SVR algorithm.
 
 Keep in mind that this is a simple visualization of the transformation using a toy dataset. In practice, the RBF kernel can create more complex transformations depending on the data and the gamma parameter.
+
+
+# Why using SVR instead of polynomial regression?
+In normal regression, we can induce nonlinear terms by including polynomial terms or other nonlinear transformations of the input features. However, this approach can lead to overfitting if the degree of the polynomial or the complexity of the transformation is too high. On the other hand, SVR uses a kernel function to implicitly map the input features into a higher-dimensional feature space, where the data may be better separated and the nonlinear relationships may be more easily modeled.
+
+The kernel function in SVR allows us to implicitly define a nonlinear relationship between the input features and the output variable by computing the inner product between the transformed input features. The most commonly used kernel functions in SVR are the Gaussian RBF kernel and the polynomial kernel. These kernels allow us to model nonlinear relationships without explicitly defining the nonlinear transformations.
+
+Another important difference between SVR and normal regression is that SVR is less sensitive to outliers in the data. This is because the margin violation penalty in SVR only depends on the distance between the predicted values and the true values, rather than the difference in the actual values themselves. As a result, SVR can produce more robust models that are less affected by extreme values in the data.
+
