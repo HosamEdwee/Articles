@@ -1,1 +1,1 @@
-# understand Arima by gradually reading the articles 
+# understand ARIMA model in time series by gradually reading the articles 
