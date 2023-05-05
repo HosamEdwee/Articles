@@ -64,7 +64,7 @@ I hope this helps clarify the steps involved in the transition between the Gauss
 
 
 
-
+# Further explanation
 Step 4: Recall the binomial theorem for $(a+b)^2$:
 
 $$(a + b)^2 = a^2 + 2ab + b^2$$
